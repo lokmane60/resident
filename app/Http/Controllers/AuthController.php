@@ -31,9 +31,11 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
+            'role' => 'user', // Default role
+            'status' => 'pending', // Set to pending for admin approval
         ]);
 
-        // Notify Admin for Approval
+        // Notify Admin for Approval (Optional)
         // Notification logic here...
 
         return redirect()->route('signin')->with('success', 'Your account has been created. It will be activated upon admin approval.');
@@ -53,15 +55,24 @@ class AuthController extends Controller
 
         $credentials = $request->only('email_or_username', 'password');
 
-        if (Auth::attempt(['email' => $credentials['email_or_username'], 'password' => $credentials['password']])
-            || Auth::attempt(['username' => $credentials['email_or_username'], 'password' => $credentials['password']])) {
-            
-            if (!Auth::user()->is_approved) {
-                Auth::logout();
+        // Attempt login with email or username
+        $user = User::where(function ($query) use ($credentials) {
+            $query->where('email', $credentials['email_or_username'])
+                  ->orWhere('username', $credentials['email_or_username']);
+        })->first();
+
+        if ($user && Hash::check($credentials['password'], $user->password)) {
+            if ($user->status !== 'approved') {
                 return back()->withErrors(['Your account is not approved yet.']);
             }
 
-            return redirect()->intended('dashboard');
+            Auth::login($user);
+            /*return redirect()->intended('dashboard');*/
+            if (Auth::user()->role == 'admin') {
+                return redirect()->route('admin.dashboard');  // Admin dashboard route
+            }
+    
+            return redirect('residents'); 
         }
 
         return back()->withErrors(['Invalid credentials.']);

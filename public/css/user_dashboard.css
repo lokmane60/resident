@@ -1,0 +1,115 @@
+/* Add the styles to your main CSS file */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fb;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the content */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Heading */
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+/* Link to add new resident */
+a {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #45a049;
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-size: 1.1em;
+}
+
+td {
+    font-size: 1em;
+    color: #555;
+}
+
+/* Actions Button Style */
+a {
+    background-color: #2196F3;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-right: 10px;
+}
+
+a:hover {
+    background-color: #0b7dda;
+}
+
+/* Delete Button Style */
+button {
+    background-color: #f44336;
+    padding: 8px 12px;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e53935;
+}
+
+.addnew{
+    margin-left: 5vw;
+}
+
+/* Add responsiveness for smaller screens */
+@media (max-width: 768px) {
+    table, th, td {
+        font-size: 0.9em;
+    }
+
+    th, td {
+        padding: 8px 10px;
+    }
+
+    a, button {
+        font-size: 0.9em;
+    }
+}

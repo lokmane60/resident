@@ -13,6 +13,16 @@
             @csrf
             <input type="text" name="email_or_username" placeholder="Email or Username" required>
             <input type="password" name="password" placeholder="Password" required>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <button type="submit">Sign In</button>
         </form>
         <a href="#">Forgot Username?</a>

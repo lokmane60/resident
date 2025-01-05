@@ -15,9 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [AuthController::class, 'showSigninForm'])->name('signin');
+
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/signup', [AuthController::class, 'showSignupForm'])->name('signup');
@@ -46,3 +45,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+use App\Http\Controllers\ResidentController;
+
+Route::middleware(['auth'])->group(function () {
+    Route::resource('residents', ResidentController::class);
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth');
